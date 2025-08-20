@@ -308,7 +308,6 @@
                                 <i class="fas fa-cart-plus mr-2"></i>เพิ่มลงตะกร้า
                             </button>
                         </div>
-                        
                     </div>
                 `;
                 menuContainer.innerHTML += card;
@@ -361,7 +360,7 @@
             
             let optionsHtml = '';
             let priceIncreaseText = '';
-            if (item.category === 'อาหารจานเดียว' && item.name !== 'สุกี้ทะเลแห้ง' && item.name !== 'สุกี้ทะเลน้ำ') {
+            if (item.category === 'อาหารจานเดียว') {
                 optionsHtml = `
                     <div class="text-left mt-4">
                         <p class="font-semibold mb-2">เลือกระดับความเผ็ด:</p>
@@ -383,7 +382,6 @@
                                 <label class="flex items-center"><input type="radio" name="extraEgg" value="" class="mr-2" checked>ไม่เพิ่ม</label>
                             </div>
                         </div>
-                        
                     </div>
                 `;
             }
@@ -393,9 +391,6 @@
                 html: `
                     <p style="font-size: 1.1rem; margin-top: 0.5rem;">ราคา ${item.price.toLocaleString()} บาท</p>
                     ${optionsHtml}
-                    <div class="mt-4">
-                        <label class="flex items-center"><input type="checkbox" id="specialExtra" class="mr-2">พิเศษ (+5 บาท)</label>
-                    </div>
                 `,
                 imageUrl: item.image,
                 imageWidth: '100%',
@@ -415,8 +410,7 @@
                     const spiciness = document.querySelector('input[name="spiciness"]:checked')?.value;
                     const noVegetables = document.getElementById('noVegetables')?.checked;
                     const extraEgg = document.querySelector('input[name="extraEgg"]:checked')?.value;
-                    const specialExtra = document.getElementById('specialExtra')?.checked;
-                    return { spiciness, noVegetables, extraEgg, specialExtra };
+                    return { spiciness, noVegetables, extraEgg };
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -441,7 +435,7 @@
 
             cart.forEach(cartItem => {
                 const menuItem = menuItems.find(item => item.id === cartItem.id);
-                const itemPrice = menuItem.price + (cartItem.options.extraEgg ? 10 : 0) + (cartItem.options.specialExtra ? 5 : 0);
+                const itemPrice = menuItem.price + (cartItem.options.extraEgg ? 10 : 0);
                 const itemTotalPrice = itemPrice * cartItem.quantity;
                 totalPrice += itemTotalPrice;
                 
@@ -452,10 +446,7 @@
                     if (spiciness) optionsArray.push(spiciness);
                     if (noVegetables) optionsArray.push('ไม่ใส่ผัก');
                     if (extraEgg) optionsArray.push(`เพิ่ม${extraEgg}`);
-                    if (specialExtra) optionsArray.push('พิเศษ');
-                    if (cartItem.options.specialExtra) optionsArray.push("พิเศษ");
-                    if (cartItem.options.specialExtra) optionsArray.push("พิเศษ");
-                        if (optionsArray.length > 0) {
+                    if (optionsArray.length > 0) {
                         optionsText = `<p class="text-gray-500 text-xs mt-1">(${optionsArray.join(', ')})</p>`;
                     }
                 }
@@ -476,7 +467,6 @@
                             <button onclick="incrementQuantity('${cartItem.uniqueId}')" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">+</button>
                             <button onclick="removeFromCart('${cartItem.uniqueId}')" class="ml-2 text-red-500 hover:text-red-700"><i class="fas fa-trash-alt"></i></button>
                         </div>
-                        
                     </div>
                 `;
             });
@@ -597,7 +587,7 @@
 
             cart.forEach(cartItem => {
                 const menuItem = menuItems.find(item => item.id === cartItem.id);
-                const itemPrice = menuItem.price + (cartItem.options.extraEgg ? 10 : 0) + (cartItem.options.specialExtra ? 5 : 0);
+                const itemPrice = menuItem.price + (cartItem.options.extraEgg ? 10 : 0);
                 const itemTotalPrice = itemPrice * cartItem.quantity;
                 totalPrice += itemTotalPrice;
 
@@ -608,7 +598,6 @@
                     if (spiciness) optionsArray.push(spiciness);
                     if (noVegetables) optionsArray.push('ไม่ใส่ผัก');
                     if (extraEgg) optionsArray.push(`เพิ่ม${extraEgg}`);
-                    if (cartItem.options.specialExtra) optionsArray.push("พิเศษ");
                     if (optionsArray.length > 0) {
                         optionsText = `<br><span style="font-size: 0.5rem; color: #555;">(${optionsArray.join(', ')})</span>`;
                     }
@@ -629,8 +618,8 @@
                     <div class="text-center space-y-2">
                         <img src="https://i.postimg.cc/sgrzrM9t/S-2637831.jpg" alt="โลโก้ร้านกระแกร่ง" class="h-20 mx-auto object-contain mb-2">
                         <h2 class="font-bold">ครัวกะแหร่ง</h2>
-                        <p>ตำบลจรเข้สามพัน อำเภออู่ทอง จังหวัดสุพรรณบุรี</p>
-                        <p>โทร: 063-412-1098</p>
+                        <p>123 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110</p>
+                        <p>โทร: 081-234-5678</p>
                         <div class="flex justify-between text-xs mt-2">
                             <p>วันที่: ${formattedDate}</p>
                             <p>เวลา: ${formattedTime}</p>
@@ -654,7 +643,7 @@
                     </div>
                     <div class="text-center text-xs mt-4 space-y-1">
                         <p>ขอบคุณที่ใช้บริการ</p>
-                        <p>โอกาสหน้าเชิญใหม่นะคะ</p>
+                        <p>โอกาสหน้าเชิญใหม่นะครับ/คะ</p>
                     </div>
                 </div>
             `;
@@ -714,6 +703,3 @@
     </script>
 </body>
 </html>
-
-
-
