@@ -235,9 +235,9 @@
         
         <div class="flex flex-wrap justify-center gap-4 mb-8">
             <button class="filter-button active px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200" data-category="all">ทั้งหมด</button>
-            <button class="filter-button px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200" data-category="main">อาหารจานหลัก</button>
-            <button class="filter-button px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200" data-category="dessert">ของหวาน</button>
-            <button class="filter-button px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200" data-category="beverage">เครื่องดื่ม</button>
+            <button class="filter-button px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200" data-category="อาหารจานเดียว">อาหารจานเดียว</button>
+            <button class="filter-button px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200" data-category="ของหวาน">ของหวาน</button>
+            <button class="filter-button px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-200" data-category="เครื่องดื่ม">เครื่องดื่ม</button>
         </div>
 
         <div id="menu" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -254,22 +254,22 @@
 
     <script>
         const menuItems = [
-    { id: 1, name: 'ข้าวผัดหมู', price: 60, category: 'main', image: 'https://img.wongnai.com/p/1920x0/2019/07/20/0f8983e2060f4b308229b1383df56b1f.jpg' },
-    { id: 2, name: 'กระเพราเนื้อเปื่อย', price: 80, category: 'main', image: 'https://i.ytimg.com/vi/zWrBXRhA7Sc/maxresdefault.jpg' },
-    { id: 3, name: 'ข้าวหมูทอดกระเทียม', price: 70, category: 'main', image: 'https://img.wongnai.com/p/1920x0/2021/04/18/f73dda7be8204a1b83a6635a14624c1b.jpg' },
-    { id: 4, name: 'กระเพราหมูกรอบ', price: 75, category: 'main', image: 'https://sgethai.com/wp-content/uploads/2022/07/crispy-pork-belly-with-thai-basil-01.jpg' },
-    { id: 5, name: 'กระเพราทะเล', price: 85, category: 'main', image: 'https://i.ytimg.com/vi/tJ_fjQPqPLU/maxresdefault.jpg' },
-    { id: 6, name: 'ชาเขียวเย็น', price: 45, category: 'beverage', image: 'https://bluemochateas.com/wp-content/uploads/2021/09/Iced-Green-Tea.jpg' },
-    { id: 7, name: 'โค้ก', price: 20, category: 'beverage', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/15-09-26-RalfR-WLC-0098.jpg/1200px-15-09-26-RalfR-WLC-0098.jpg' },
-    { id: 8, name: 'น้ำเปล่า Crystal', price: 15, category: 'beverage', image: 'https://backend.tops.co.th/media/catalog/product/8/8/8851994200025_1.jpg' },
-    { id: 9, name: 'ขนมไทย', price: 50, category: 'dessert', image: 'https://www.ryoiireview.com/upload/article/202201/1643269389_b4c5e3a736021571d340150d69111c19.jpg' },
-    { id: 10, name: 'ข้าวเหนียวมูน', price: 40, category: 'dessert', image: 'https://img.wongnai.com/p/1920x0/2018/04/05/7e3a8b27c9d94f289d00f6b4d3f23f81.jpg' },
-    { id: 11, name: 'กุ้งทอดกระเทียม', price: 90, category: 'main', image: 'https://food.trueid.net/uploads/images/2021/08/11/dePnLzrrrxxQ/dePnLzrrrxxQ.jpg' },
-    { id: 12, name: 'ข้าวผัดทะเล', price: 85, category: 'main', image: 'https://www.knorr.com/content/dam/unilever/knorr_world/thailand/pack_shot/8850144200018-1185854.jpg' },
-    { id: 13, name: 'สุกี้ทะเลแห้ง', price: 90, category: 'main', image: 'https://i.ytimg.com/vi/K5FNY9ICWz8/maxresdefault.jpg' },
-    { id: 14, name: 'สุกี้ทะเลน้ำ', price: 90, category: 'main', image: 'https://i.ytimg.com/vi/wJ7Qz-uYj9I/maxresdefault.jpg' },
-    { id: 15, name: 'ผัดกะเพราหน่อไม้', price: 65, category: 'main', image: 'https://i.ytimg.com/vi/uQQ_z-Siuas/maxresdefault.jpg' }
-];
+            { id: 1, name: 'ข้าวผัดหมู', price: 40, description: 'แซ่บนัวร์ชัวร์จ๊ะ', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/fR55k2sX/image.jpg' },
+            { id: 2, name: 'กระเพราเนื้อเปื่อย', price: 55, description: 'สูตรแม่กุ้งแซ่บระเบิด', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/nLz2m4VW/image.jpg' },
+            { id: 3, name: 'ข้าวหมูทอดกระเทียม', price: 40, description: 'สูตรแม่คุณพรเจ้าเก่า', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/Gp5Qx4Hm/image.jpg' },
+            { id: 4, name: 'กระเพราหมูกรอบ', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/0QKCW9wd/image.jpg' },
+            { id: 5, name: 'กระเพราทะเล', price: 70, description: 'สูตรแม่แตง comfirm', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/VL8FgQLn/image.jpg' },
+            { id: 6, name: 'ชาเขียวเย็น', price: 30, description: '7-11', category: 'เครื่องดื่ม', image: 'https://i.postimg.cc/nhPw7wtZ/image.jpg' },
+            { id: 7, name: 'โค้ก', price: 15, description: '7-11', category: 'เครื่องดื่ม', image: 'https://i.postimg.cc/C5SvY3bC/coke.webp' },
+            { id: 8, name: 'น้ำเปล่า', price: 10, description: 'crytal', category: 'เครื่องดื่ม', image: 'https://i.postimg.cc/RF6RmM3n/crystal.jpg' },
+            { id: 9, name: 'ขนมไทย', price: 159, description: 'หอมหวานชื่นใจ', category: 'ของหวาน', image: 'https://i.postimg.cc/bvPKBY1k/image.jpg' },
+            { id: 10, name: 'ข้าวเหนียวมูน', price: 25, description: 'ข้าวเหนียวมูนนุ่มๆ หอมกะทิ', category: 'ของหวาน', image: 'https://i.postimg.cc/yYmqXSZs/image.jpg' },
+            { id: 11, name: 'กุ้งทอดกระเทียม', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/yYmqXSZs/image.jpg' },
+            { id: 12, name: 'ข้าวผัดทะเล', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/Gm3x0FDp/image.jpg' },
+            { id: 13, name: 'สุกี้ทะเลแห้ง', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/N0S6rZzy/image.jpg' },
+            { id: 14, name: 'สุกี้ทะเลน้ำ', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/zBhnwpsx/image.jpg' },
+            { id: 15, name: 'ผัดกะเพราหน่อไม้', price: 45, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/brj1mk8p/image.jpg' }
+        ];
 
         let cart = [];
         const menuContainer = document.getElementById('menu');
@@ -292,7 +292,7 @@
                         <div class="p-4">
                             <h3 class="font-semibold text-lg md:text-xl text-gray-800">${item.name}</h3>
                             <p class="text-gray-600 mt-1">${item.price.toLocaleString()} บาท</p>
-                            <button onclick="addToCart(${item.id})" class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-200">
+                            <button onclick="showItemDetails(${item.id})" class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-200">
                                 <i class="fas fa-cart-plus mr-2"></i>เพิ่มลงตะกร้า
                             </button>
                         </div>
@@ -313,13 +313,13 @@
             floatingCartItemCount.textContent = totalItems;
         }
 
-        function addToCart(itemId) {
-            const itemInCart = cart.find(item => item.id === itemId);
-            if (itemInCart) {
-                itemInCart.quantity++;
-            } else {
-                cart.push({ id: itemId, quantity: 1 });
+        function addToCart(itemId, options = {}) {
+            const uniqueId = Date.now(); // Create a unique ID for each cart entry
+            let priceModifier = 0;
+            if (options.extraEgg) {
+                priceModifier = 10;
             }
+            cart.push({ id: itemId, quantity: 1, options: options, uniqueId: uniqueId, priceModifier: priceModifier });
             updateCartCount();
             showAddedToCartAlert();
         }
@@ -345,9 +345,41 @@
         
         function showItemDetails(itemId) {
             const item = menuItems.find(i => i.id === itemId);
+            
+            let optionsHtml = '';
+            let priceIncreaseText = '';
+            if (item.category === 'อาหารจานเดียว') {
+                optionsHtml = `
+                    <div class="text-left mt-4">
+                        <p class="font-semibold mb-2">เลือกระดับความเผ็ด:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <label class="flex items-center"><input type="radio" name="spiciness" value="เผ็ดมาก" class="mr-2">เผ็ดมาก</label>
+                            <label class="flex items-center"><input type="radio" name="spiciness" value="เผ็ดกลาง" class="mr-2" checked>เผ็ดกลาง</label>
+                            <label class="flex items-center"><input type="radio" name="spiciness" value="เผ็ดน้อย" class="mr-2">เผ็ดน้อย</label>
+                            <label class="flex items-center"><input type="radio" name="spiciness" value="ไม่เผ็ด" class="mr-2">ไม่เผ็ด</label>
+                        </div>
+                        <div class="mt-4">
+                            <label class="flex items-center"><input type="checkbox" id="noVegetables" class="mr-2">ไม่ใส่ผัก</label>
+                        </div>
+                        <div class="mt-4">
+                            <p class="font-semibold mb-2">เพิ่มไข่ (+10 บาท):</p>
+                            <div class="flex flex-wrap gap-2">
+                                <label class="flex items-center"><input type="radio" name="extraEgg" value="ไข่ดาว" class="mr-2">ไข่ดาว</label>
+                                <label class="flex items-center"><input type="radio" name="extraEgg" value="ไข่เจียว" class="mr-2">ไข่เจียว</label>
+                                <label class="flex items-center"><input type="radio" name="extraEgg" value="ไข่เยี่ยวม้า" class="mr-2">ไข่เยี่ยวม้า</label>
+                                <label class="flex items-center"><input type="radio" name="extraEgg" value="" class="mr-2" checked>ไม่เพิ่ม</label>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             Swal.fire({
                 title: `<span style="font-size: 1.5rem; font-weight: bold;">${item.name}</span>`,
-                html: `<p style="font-size: 1.1rem; margin-top: 0.5rem;">ราคา ${item.price.toLocaleString()} บาท</p>`,
+                html: `
+                    <p style="font-size: 1.1rem; margin-top: 0.5rem;">ราคา ${item.price.toLocaleString()} บาท</p>
+                    ${optionsHtml}
+                `,
                 imageUrl: item.image,
                 imageWidth: '100%',
                 imageAlt: item.name,
@@ -361,10 +393,16 @@
                     cancelButton: 'swal2-cancel-button-custom',
                     actions: 'swal2-actions'
                 },
-                buttonsStyling: false
+                buttonsStyling: false,
+                preConfirm: () => {
+                    const spiciness = document.querySelector('input[name="spiciness"]:checked')?.value;
+                    const noVegetables = document.getElementById('noVegetables')?.checked;
+                    const extraEgg = document.querySelector('input[name="extraEgg"]:checked')?.value;
+                    return { spiciness, noVegetables, extraEgg };
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    addToCart(itemId);
+                    addToCart(itemId, result.value);
                 }
             });
         }
@@ -385,8 +423,21 @@
 
             cart.forEach(cartItem => {
                 const menuItem = menuItems.find(item => item.id === cartItem.id);
-                const itemTotalPrice = menuItem.price * cartItem.quantity;
+                const itemPrice = menuItem.price + (cartItem.options.extraEgg ? 10 : 0);
+                const itemTotalPrice = itemPrice * cartItem.quantity;
                 totalPrice += itemTotalPrice;
+                
+                let optionsText = '';
+                if (cartItem.options) {
+                    const { spiciness, noVegetables, extraEgg } = cartItem.options;
+                    let optionsArray = [];
+                    if (spiciness) optionsArray.push(spiciness);
+                    if (noVegetables) optionsArray.push('ไม่ใส่ผัก');
+                    if (extraEgg) optionsArray.push(`เพิ่ม${extraEgg}`);
+                    if (optionsArray.length > 0) {
+                        optionsText = `<p class="text-gray-500 text-xs mt-1">(${optionsArray.join(', ')})</p>`;
+                    }
+                }
 
                 cartHtml += `
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -394,14 +445,15 @@
                             <img src="${menuItem.image}" alt="${menuItem.name}" class="w-16 h-16 object-cover rounded-md mr-4">
                             <div>
                                 <p class="font-semibold text-gray-800">${menuItem.name}</p>
-                                <p class="text-gray-600 text-sm">${menuItem.price.toLocaleString()} บาท</p>
+                                ${optionsText}
+                                <p class="text-gray-600 text-sm">${itemPrice.toLocaleString()} บาท</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button onclick="decrementQuantity(${cartItem.id})" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">-</button>
+                            <button onclick="decrementQuantity('${cartItem.uniqueId}')" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">-</button>
                             <span class="w-8 text-center font-semibold">${cartItem.quantity}</span>
-                            <button onclick="incrementQuantity(${cartItem.id})" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">+</button>
-                            <button onclick="removeFromCart(${cartItem.id})" class="ml-2 text-red-500 hover:text-red-700"><i class="fas fa-trash-alt"></i></button>
+                            <button onclick="incrementQuantity('${cartItem.uniqueId}')" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">+</button>
+                            <button onclick="removeFromCart('${cartItem.uniqueId}')" class="ml-2 text-red-500 hover:text-red-700"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 `;
@@ -438,8 +490,8 @@
             });
         }
         
-        function incrementQuantity(itemId) {
-            const itemInCart = cart.find(item => item.id === itemId);
+        function incrementQuantity(uniqueId) {
+            const itemInCart = cart.find(item => item.uniqueId.toString() === uniqueId);
             if (itemInCart) {
                 itemInCart.quantity++;
                 updateCartCount();
@@ -447,21 +499,21 @@
             }
         }
 
-        function decrementQuantity(itemId) {
-            const itemInCart = cart.find(item => item.id === itemId);
+        function decrementQuantity(uniqueId) {
+            const itemInCart = cart.find(item => item.uniqueId.toString() === uniqueId);
             if (itemInCart) {
                 if (itemInCart.quantity > 1) {
                     itemInCart.quantity--;
                 } else {
-                    cart = cart.filter(item => item.id !== itemId);
+                    cart = cart.filter(item => item.uniqueId.toString() !== uniqueId);
                 }
                 updateCartCount();
                 showCartModal();
             }
         }
         
-        function removeFromCart(itemId) {
-            cart = cart.filter(item => item.id !== itemId);
+        function removeFromCart(uniqueId) {
+            cart = cart.filter(item => item.uniqueId.toString() !== uniqueId);
             updateCartCount();
             showCartModal();
         }
@@ -523,32 +575,43 @@
 
             cart.forEach(cartItem => {
                 const menuItem = menuItems.find(item => item.id === cartItem.id);
-                const itemTotalPrice = menuItem.price * cartItem.quantity;
+                const itemPrice = menuItem.price + (cartItem.options.extraEgg ? 10 : 0);
+                const itemTotalPrice = itemPrice * cartItem.quantity;
                 totalPrice += itemTotalPrice;
+
+                let optionsText = '';
+                if (cartItem.options) {
+                    const { spiciness, noVegetables, extraEgg } = cartItem.options;
+                    let optionsArray = [];
+                    if (spiciness) optionsArray.push(spiciness);
+                    if (noVegetables) optionsArray.push('ไม่ใส่ผัก');
+                    if (extraEgg) optionsArray.push(`เพิ่ม${extraEgg}`);
+                    if (optionsArray.length > 0) {
+                        optionsText = `<br><span style="font-size: 0.5rem; color: #555;">(${optionsArray.join(', ')})</span>`;
+                    }
+                }
 
                 receiptItemsHtml += `
                     <tr>
-                        <td class="py-1 text-left">${menuItem.name}</td>
+                        <td class="py-1 text-left">${menuItem.name}${optionsText}</td>
                         <td class="py-1 text-center">${cartItem.quantity}</td>
-                        <td class="py-1 text-right">${menuItem.price.toLocaleString()}</td>
+                        <td class="py-1 text-right">${itemPrice.toLocaleString()}</td>
                         <td class="py-1 text-right">${itemTotalPrice.toLocaleString()}</td>
                     </tr>
                 `;
             });
 
             const receiptHtml = `
-                <div id="receiptContent" class="receipt-container bg-white text-gray-900 mx-auto max-w-sm p-4 border border-dashed border-gray-400">
+                <div id="receiptContent" class="receipt-container bg-white text-gray-900 mx-auto max-w-sm p-4">
                     <div class="text-center space-y-2">
-                        <img src="https://i.postimg.cc/sgrzrM9t/S-2637831.jpg" alt="โลโก้ร้านกระแกร่ง" class="h-20 mx-auto object-contain" crossorigin="anonymous">
-                        <h2 class="font-bold">ร้านกระแกร่ง</h2>
+                        <img src="https://i.postimg.cc/sgrzrM9t/S-2637831.jpg" alt="โลโก้ร้านกระแกร่ง" class="h-20 mx-auto object-contain">
+                        <h2 class="font-bold">ครัวกะแหร่ง</h2>
                         <p>123 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110</p>
                         <p>โทร: 081-234-5678</p>
-                        <hr class="border-t border-dashed border-gray-400 my-2">
                         <div class="flex justify-between text-xs">
                             <p>วันที่: ${formattedDate}</p>
                             <p>เวลา: ${formattedTime}</p>
                         </div>
-                        <hr class="border-t border-dashed border-gray-400 my-2">
                     </div>
                     <table class="w-full text-xs mt-2">
                         <thead>
@@ -563,11 +626,9 @@
                             ${receiptItemsHtml}
                         </tbody>
                     </table>
-                    <hr class="border-t border-dashed border-gray-400 my-2">
                     <div class="text-right font-bold mt-2">
                         <p class="total-price">ยอดรวมสุทธิ: ${totalPrice.toLocaleString()} บาท</p>
                     </div>
-                     <hr class="border-t border-dashed border-gray-400 my-2">
                     <div class="text-center text-xs mt-4 space-y-1">
                         <p>ขอบคุณที่ใช้บริการ</p>
                         <p>โอกาสหน้าเชิญใหม่นะครับ/คะ</p>
@@ -600,11 +661,10 @@
                         }
                         
                         html2canvas(receiptContent, {
-                            scale: 2,
-                            useCORS: true // <-- จุดที่แก้ไข
+                            scale: 2
                         }).then(canvas => {
                             const link = document.createElement('a');
-                            link.download = `ใบเสร็จ_ร้านกระแกร่ง_${new Date().toLocaleDateString('th-TH')}.png`;
+                            link.download = `ใบเสร็จ_ครัวกะแกร่ง_${new Date().toLocaleDateString('th-TH')}.png`;
                             link.href = canvas.toDataURL('image/png');
                             
                             link.style.display = 'none';
