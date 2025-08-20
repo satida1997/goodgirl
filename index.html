@@ -158,9 +158,19 @@
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
+
+        /* Add @font-face rule for FC Ekaluck */
+        @font-face {
+            font-family: 'FC Ekaluck';
+            src: url('URL_TO_YOUR_FONT_FILE.woff2') format('woff2'),
+                 url('URL_TO_YOUR_FONT_FILE.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
         /* Adjusted styles for the receipt container */
         .receipt-container {
-            font-family: 'IBM Plex Sans Thai', sans-serif; /* ใช้ฟอนต์ IBM Plex Sans Thai สำหรับใบเสร็จ */
+            font-family: 'FC Ekaluck', 'IBM Plex Sans Thai', sans-serif; /* ใช้ฟอนต์ FC Ekaluck สำหรับใบเสร็จ */
             font-size: 0.65rem;
             padding: 1rem;
             line-height: 1.5; /* เพิ่ม line-height เพื่อป้องกันข้อความซ้อนทับกัน */
