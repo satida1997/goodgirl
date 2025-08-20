@@ -446,6 +446,7 @@
                     if (spiciness) optionsArray.push(spiciness);
                     if (noVegetables) optionsArray.push('ไม่ใส่ผัก');
                     if (extraEgg) optionsArray.push(`เพิ่ม${extraEgg}`);
+                    if (specialExtra) optionsArray.push('พิเศษ');
                     if (optionsArray.length > 0) {
                         optionsText = `<p class="text-gray-500 text-xs mt-1">(${optionsArray.join(', ')})</p>`;
                     }
@@ -703,5 +704,6 @@
     </script>
 </body>
 </html>
+
 
 
