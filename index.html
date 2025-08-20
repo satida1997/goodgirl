@@ -604,7 +604,7 @@
             });
 
             const receiptHtml = `
-                <div id="receiptContent" class="receipt-container bg-white text-gray-900 mx-auto max-w-sm p-4">
+                <div id="receiptContent" class="receipt-container bg-white text-gray-900 w-[24rem] max-w-none mx-auto p-4">
                     <div class="text-center space-y-2">
                         <img src="https://i.postimg.cc/sgrzrM9t/S-2637831.jpg" alt="โลโก้ร้านกระแกร่ง" class="h-20 mx-auto object-contain mb-2">
                         <h2 class="font-bold">ครัวกะแหร่ง</h2>
@@ -651,7 +651,7 @@
                     cancelButton: 'swal2-cancel-button-custom',
                     actions: 'swal2-actions'
                 },
-                width: 'auto',
+                width: '24rem',
                 buttonsStyling: false,
                 didOpen: () => {
                     document.querySelector('.swal2-confirm').onclick = () => {
