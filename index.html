@@ -6,216 +6,99 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- นำเข้าฟอนต์ภาษาไทยจาก Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Mono:wght@400;500;700&family=Prompt:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* CSS ทั่วไปของหน้าเว็บ */
         body {
             font-family: 'Prompt', sans-serif;
             font-size: 1rem;
         }
-        @media (min-width: 640px) {
-            body {
-                font-size: 1.05rem;
-            }
-        }
-        @media (min-width: 768px) {
-            body {
-                font-size: 1.125rem;
-            }
-        }
+        @media (min-width: 640px) { body { font-size: 1.05rem; } }
+        @media (min-width: 768px) { body { font-size: 1.125rem; } }
+        .header-sticky { position: sticky; top: 0; z-index: 1000; }
+        .floating-cart { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1.25rem 1.5rem; border-radius: 0; box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; font-size: 1.5rem; font-weight: bold; color: white; background-color: #2563eb; }
+        .floating-cart:hover { transform: none; background-color: #1d4ed8; box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.3); }
+        .floating-cart .item-count { background-color: #ef4444; color: white; font-size: 1rem; padding: 4px 10px; border-radius: 9999px; position: absolute; top: 5px; right: 5px; display: none; }
+        .floating-cart.has-items .item-count { display: block; }
+        .item-card-container { position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; }
+        .item-card-container img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+        .filter-button.active { background-color: #3b82f6; color: white; font-weight: bold; }
+        .swal2-image-custom { max-width: 60vw !important; max-height: 90vh !important; object-fit: contain !important; padding: 0 !important; box-sizing: border-box; }
+        .swal2-confirm-button-custom { background-color: #22c55e !important; color: white !important; font-weight: 600 !important; padding: 0.75rem 1.5rem !important; border-radius: 9999px !important; transition: background-color 0.2s ease-in-out !important; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin: 0.5rem; font-size: 1.125rem !important; }
+        .swal2-confirm-button-custom:hover { background-color: #16a34a !important; }
+        .swal2-cancel-button-custom { background-color: #9ca3af !important; color: white !important; font-weight: 600 !important; padding: 0.75rem 1.5rem !important; border-radius: 9999px !important; transition: background-color 0.2s ease-in-out !important; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin: 0.5rem; font-size: 1.125rem !important; }
+        .swal2-cancel-button-custom:hover { background-color: #6b7280 !important; }
+        .swal2-actions { flex-wrap: wrap; justify-content: center; gap: 1rem; padding-top: 1rem; }
+        .swal2-popup-custom { width: 95% !important; max-width: 95% !important; }
+        @media (min-width: 640px) { .swal2-popup-custom { width: 100% !important; max-width: 40rem !important; } }
+        @media (min-width: 768px) { .swal2-popup-custom { max-width: 48rem !important; } }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
 
-        .header-sticky {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .floating-cart {
-            position: fixed;
-            bottom: 0;
-            left: 0;
+        /*
+        ================================================================
+        == CSS สำหรับปรับแต่งใบเสร็จ (ส่วนที่คุณต้องแก้ไข) ==
+        ================================================================
+        */
+        .receipt-thermal {
+            font-family: 'IBM Plex Sans Thai Mono', monospace;
+            max-width: 302px; /* ประมาณ 80mm */
             width: 100%;
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.25rem 1.5rem;
-            border-radius: 0;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            background-color: #2563eb;
-        }
-        .floating-cart:hover {
-            transform: none;
-            background-color: #1d4ed8;
-            box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.3);
-        }
-        .floating-cart .item-count {
-            background-color: #ef4444;
-            color: white;
-            font-size: 1rem;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            display: none;
-        }
-        .floating-cart.has-items .item-count {
-            display: block;
-        }
-        
-        .item-card-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            overflow: hidden;
-        }
-
-        .item-card-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-
-        .filter-button.active {
-            background-color: #3b82f6;
-            color: white;
-            font-weight: bold;
-        }
-
-        .swal2-image-custom {
-            max-width: 60vw !important;
-            max-height: 90vh !important;
-            object-fit: contain !important;
-            padding: 0 !important;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #000;
+            padding: 10px;
             box-sizing: border-box;
         }
-
-        .swal2-confirm-button-custom {
-            background-color: #22c55e !important;
-            color: white !important;
-            font-weight: 600 !important;
-            padding: 0.75rem 1.5rem !important;
-            border-radius: 9999px !important;
-            transition: background-color 0.2s ease-in-out !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 0.5rem;
-            font-size: 1.125rem !important;
-        }
-        .swal2-confirm-button-custom:hover {
-            background-color: #16a34a !important;
+        
+        .receipt-thermal .header-text {
+            text-align: center;
         }
 
-        .swal2-cancel-button-custom {
-            background-color: #9ca3af !important;
-            color: white !important;
-            font-weight: 600 !important;
-            padding: 0.75rem 1.5rem !important;
-            border-radius: 9999px !important;
-            transition: background-color 0.2s ease-in-out !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 0.5rem;
-            font-size: 1.125rem !important;
+        .receipt-thermal .logo {
+            max-width: 100px;
+            margin: 0 auto 10px auto;
         }
-        .swal2-cancel-button-custom:hover {
-            background-color: #6b7280 !important;
+
+        .receipt-thermal .item-table {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .receipt-thermal .item-table th,
+        .receipt-thermal .item-table td {
+            padding: 2px 0;
+            vertical-align: top;
+        }
+
+        .receipt-thermal .item-table .col-item {
+            text-align: left;
+            width: 50%;
+        }
+
+        .receipt-thermal .item-table .col-qty,
+        .receipt-thermal .item-table .col-price,
+        .receipt-thermal .item-table .col-total {
+            text-align: right;
+            width: 15%;
+            white-space: nowrap;
         }
         
-        .swal2-actions {
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            padding-top: 1rem;
-        }
-
-        .swal2-popup-custom {
-            width: 95% !important;
-            max-width: 95% !important;
-        }
-        @media (min-width: 640px) {
-            .swal2-popup-custom {
-                width: 100% !important;
-                max-width: 40rem !important;
-            }
-        }
-        @media (min-width: 768px) {
-            .swal2-popup-custom {
-                max-width: 48rem !important;
-            }
-        }
-
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Add @font-face rule for FC Ekaluck */
-        @font-face {
-            font-family: 'FC Ekaluck';
-            src: url('URL_TO_YOUR_FONT_FILE.woff2') format('woff2'),
-                 url('URL_TO_YOUR_FONT_FILE.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
-        /* Adjusted styles for the receipt container */
-        .receipt-container {
-            font-family: 'FC Ekaluck', 'IBM Plex Sans Thai', sans-serif; /* ใช้ฟอนต์ FC Ekaluck สำหรับใบเสร็จ */
-            font-size: 0.65rem;
-            padding: 1rem;
-            line-height: 1.5; /* เพิ่ม line-height เพื่อป้องกันข้อความซ้อนทับกัน */
-        }
-        .receipt-container h2 {
-            font-size: 1.05rem;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .receipt-container h3 {
-            margin-top: 0.25rem;
-        }
-        .receipt-container table {
-            font-size: 0.55rem;
-            border-collapse: collapse;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .receipt-container .total-price {
-            font-size: 0.85rem;
-        }
-        .receipt-container .space-y-2 > div {
-            margin-top: 0.5rem !important;
-            margin-bottom: 0.5rem !important;
-        }
-        
-        /* Specific adjustments for smaller screens */
-        @media (max-width: 639px) {
-            .receipt-container p {
-                line-height: 1.2;
-            }
-            .receipt-container .space-y-1 > p {
-                margin-top: 0.25rem !important;
-                margin-bottom: 0.25rem !important;
-            }
-            .receipt-container table td, .receipt-container table th {
-                padding: 0.5rem 0.5rem;
-            }
+        .receipt-thermal .item-options {
+            font-size: 12px;
+            color: #333;
+            padding-left: 5px;
         }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen pb-32 text-base md:text-lg"> 
 
     <header class="header-sticky bg-white shadow-md flex justify-between items-center px-4 md:px-8 py-4">
-  <img src="https://i.postimg.cc/sgrzrM9t/S-2637831.jpg" alt="โลโก้ร้านกระแกร่ง" class="h-16 sm:h-20 md:h-24 object-contain">
+        <img src="https://i.postimg.cc/sgrzrM9t/S-2637831.jpg" alt="โลโก้ร้านกระแกร่ง" class="h-16 sm:h-20 md:h-24 object-contain">
         <button onclick="showCartModal()" class="relative flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full transition duration-200">
             <i class="fas fa-shopping-cart text-xl mr-2"></i>
             <span>ตะกร้า</span>
@@ -262,7 +145,8 @@
     </button>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+    
+    <!-- ส่วนของ JavaScript -->
     <script>
         const menuItems = [
             { id: 1, name: 'ข้าวผัดหมู', price: 40, description: 'แซ่บนัวร์ชัวร์จ๊ะ', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/fR55k2sX/image.jpg' },
@@ -277,7 +161,7 @@
             { id: 10, name: 'ข้าวเหนียวมูน', price: 25, description: 'ข้าวเหนียวมูนนุ่มๆ หอมกะทิ', category: 'ของหวาน', image: 'https://i.postimg.cc/yYmqXSZs/image.jpg' },
             { id: 11, name: 'กุ้งทอดกระเทียม', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/yYmqXSZs/image.jpg' },
             { id: 12, name: 'ข้าวผัดทะเล', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/Gm3x0FDp/image.jpg' },
-            { id: 16, name: 'ข้าวหมูทอดกระเทียม', description: '', price: 40, image: 'https://i.postimg.cc/Mpsbzn0m/image.jpg', category: "อาหารจานเดียว" },
+            { id: 16, name: 'ข้าวหมูทอดกระเทียม', price: 40, image: 'https://i.postimg.cc/Mpsbzn0m/image.jpg', category: "อาหารจานเดียว" },
             { id: 13, name: 'สุกี้ทะเลแห้ง', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/N0S6rZzy/image.jpg' },
             { id: 14, name: 'สุกี้ทะเลน้ำ', price: 55, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/zBhnwpsx/image.jpg' },
             { id: 15, name: 'ผัดกะเพราหน่อไม้', price: 45, description: '', category: 'อาหารจานเดียว', image: 'https://i.postimg.cc/brj1mk8p/image.jpg' }
@@ -326,7 +210,7 @@
         }
 
         function addToCart(itemId, options = {}) {
-            const uniqueId = Date.now(); // Create a unique ID for each cart entry
+            const uniqueId = Date.now();
             let priceModifier = 0;
             if (options.extraEgg) {
                 priceModifier = 10;
@@ -359,7 +243,6 @@
             const item = menuItems.find(i => i.id === itemId);
             
             let optionsHtml = '';
-            let priceIncreaseText = '';
             if (item.category === 'อาหารจานเดียว') {
                 optionsHtml = `
                     <div class="text-left mt-4">
@@ -388,30 +271,20 @@
 
             Swal.fire({
                 title: `<span style="font-size: 1.5rem; font-weight: bold;">${item.name}</span>`,
-                html: `
-                    <p style="font-size: 1.1rem; margin-top: 0.5rem;">ราคา ${item.price.toLocaleString()} บาท</p>
-                    ${optionsHtml}
-                `,
+                html: `<p style="font-size: 1.1rem; margin-top: 0.5rem;">ราคา ${item.price.toLocaleString()} บาท</p>${optionsHtml}`,
                 imageUrl: item.image,
                 imageWidth: '100%',
                 imageAlt: item.name,
                 showCancelButton: true,
                 confirmButtonText: '<i class="fas fa-cart-plus"></i> เพิ่มลงตะกร้า',
                 cancelButtonText: 'ปิด',
-                customClass: {
-                    popup: 'swal2-popup-custom',
-                    image: 'swal2-image-custom',
-                    confirmButton: 'swal2-confirm-button-custom',
-                    cancelButton: 'swal2-cancel-button-custom',
-                    actions: 'swal2-actions'
-                },
+                customClass: { popup: 'swal2-popup-custom', image: 'swal2-image-custom', confirmButton: 'swal2-confirm-button-custom', cancelButton: 'swal2-cancel-button-custom', actions: 'swal2-actions' },
                 buttonsStyling: false,
-                preConfirm: () => {
-                    const spiciness = document.querySelector('input[name="spiciness"]:checked')?.value;
-                    const noVegetables = document.getElementById('noVegetables')?.checked;
-                    const extraEgg = document.querySelector('input[name="extraEgg"]:checked')?.value;
-                    return { spiciness, noVegetables, extraEgg };
-                }
+                preConfirm: () => ({
+                    spiciness: document.querySelector('input[name="spiciness"]:checked')?.value,
+                    noVegetables: document.getElementById('noVegetables')?.checked,
+                    extraEgg: document.querySelector('input[name="extraEgg"]:checked')?.value
+                })
             }).then((result) => {
                 if (result.isConfirmed) {
                     addToCart(itemId, result.value);
@@ -421,12 +294,7 @@
 
         function showCartModal() {
             if (cart.length === 0) {
-                Swal.fire({
-                    title: 'ตะกร้าสินค้าว่างเปล่า',
-                    text: 'โปรดเลือกสินค้าที่คุณต้องการ',
-                    icon: 'info',
-                    confirmButtonText: 'ตกลง'
-                });
+                Swal.fire({ title: 'ตะกร้าสินค้าว่างเปล่า', text: 'โปรดเลือกสินค้าที่คุณต้องการ', icon: 'info', confirmButtonText: 'ตกลง' });
                 return;
             }
 
@@ -453,20 +321,8 @@
 
                 cartHtml += `
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center">
-                            <img src="${menuItem.image}" alt="${menuItem.name}" class="w-16 h-16 object-cover rounded-md mr-4">
-                            <div>
-                                <p class="font-semibold text-gray-800">${menuItem.name}</p>
-                                ${optionsText}
-                                <p class="text-gray-600 text-sm">${itemPrice.toLocaleString()} บาท</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <button onclick="decrementQuantity('${cartItem.uniqueId}')" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">-</button>
-                            <span class="w-8 text-center font-semibold">${cartItem.quantity}</span>
-                            <button onclick="incrementQuantity('${cartItem.uniqueId}')" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">+</button>
-                            <button onclick="removeFromCart('${cartItem.uniqueId}')" class="ml-2 text-red-500 hover:text-red-700"><i class="fas fa-trash-alt"></i></button>
-                        </div>
+                        <div class="flex items-center"><img src="${menuItem.image}" alt="${menuItem.name}" class="w-16 h-16 object-cover rounded-md mr-4"><div><p class="font-semibold text-gray-800">${menuItem.name}</p>${optionsText}<p class="text-gray-600 text-sm">${itemPrice.toLocaleString()} บาท</p></div></div>
+                        <div class="flex items-center gap-3"><button onclick="decrementQuantity('${cartItem.uniqueId}')" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">-</button><span class="w-8 text-center font-semibold">${cartItem.quantity}</span><button onclick="incrementQuantity('${cartItem.uniqueId}')" class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold">+</button><button onclick="removeFromCart('${cartItem.uniqueId}')" class="ml-2 text-red-500 hover:text-red-700"><i class="fas fa-trash-alt"></i></button></div>
                     </div>
                 `;
             });
@@ -474,27 +330,13 @@
 
             Swal.fire({
                 title: '<span style="font-size: 1.75rem; font-weight: bold;">ตะกร้าสินค้า</span>',
-                html: `
-                    ${cartHtml}
-                    <hr class="my-4">
-                    <div class="text-right text-xl font-bold text-gray-800">
-                        ยอดรวม: ${totalPrice.toLocaleString()} บาท
-                    </div>
-                `,
+                html: `${cartHtml}<hr class="my-4"><div class="text-right text-xl font-bold text-gray-800">ยอดรวม: ${totalPrice.toLocaleString()} บาท</div>`,
                 showCancelButton: true,
                 confirmButtonText: '<i class="fas fa-receipt"></i> สร้างใบเสร็จ',
                 cancelButtonText: 'เลือกสินค้าต่อ',
-                customClass: {
-                    popup: 'swal2-popup-custom',
-                    confirmButton: 'swal2-confirm-button-custom',
-                    cancelButton: 'swal2-cancel-button-custom',
-                    actions: 'swal2-actions'
-                },
+                customClass: { popup: 'swal2-popup-custom', confirmButton: 'swal2-confirm-button-custom', cancelButton: 'swal2-cancel-button-custom', actions: 'swal2-actions' },
                 width: '90%',
                 buttonsStyling: false,
-                didOpen: () => {
-                   
-                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     generateReceipt();
@@ -502,82 +344,35 @@
             });
         }
         
-        function incrementQuantity(uniqueId) {
-            const itemInCart = cart.find(item => item.uniqueId.toString() === uniqueId);
-            if (itemInCart) {
-                itemInCart.quantity++;
-                updateCartCount();
-                showCartModal(); 
-            }
-        }
-
-        function decrementQuantity(uniqueId) {
-            const itemInCart = cart.find(item => item.uniqueId.toString() === uniqueId);
-            if (itemInCart) {
-                if (itemInCart.quantity > 1) {
-                    itemInCart.quantity--;
-                } else {
-                    cart = cart.filter(item => item.uniqueId.toString() !== uniqueId);
-                }
-                updateCartCount();
-                showCartModal();
-            }
-        }
-        
-        function removeFromCart(uniqueId) {
-            cart = cart.filter(item => item.uniqueId.toString() !== uniqueId);
-            updateCartCount();
-            showCartModal();
-        }
+        function incrementQuantity(uniqueId) { const itemInCart = cart.find(item => item.uniqueId.toString() === uniqueId); if (itemInCart) { itemInCart.quantity++; updateCartCount(); showCartModal(); } }
+        function decrementQuantity(uniqueId) { const itemInCart = cart.find(item => item.uniqueId.toString() === uniqueId); if (itemInCart) { if (itemInCart.quantity > 1) { itemInCart.quantity--; } else { cart = cart.filter(item => item.uniqueId.toString() !== uniqueId); } updateCartCount(); showCartModal(); } }
+        function removeFromCart(uniqueId) { cart = cart.filter(item => item.uniqueId.toString() !== uniqueId); updateCartCount(); showCartModal(); }
         
         function filterMenu(category) {
-            const filteredItems = category === 'all' 
-                ? menuItems 
-                : menuItems.filter(item => item.category === category);
+            const filteredItems = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
             renderMenu(filteredItems);
-            
-            filterButtons.forEach(button => {
-                button.classList.toggle('active', button.dataset.category === category);
-            });
+            filterButtons.forEach(button => button.classList.toggle('active', button.dataset.category === category));
         }
 
         function searchMenu(query) {
             const lowerCaseQuery = query.toLowerCase().trim();
-            if (lowerCaseQuery === '') {
-                renderMenu(menuItems);
-                return;
-            }
-            const filteredItems = menuItems.filter(item => 
-                item.name.toLowerCase().includes(lowerCaseQuery)
-            );
+            const filteredItems = lowerCaseQuery === '' ? menuItems : menuItems.filter(item => item.name.toLowerCase().includes(lowerCaseQuery));
             renderMenu(filteredItems);
         }
         
-        searchInput.addEventListener('input', () => {
-            const query = searchInput.value;
-            searchMenu(query);
-            clearSearchBtn.style.display = query ? 'flex' : 'none';
-        });
-
-        searchButton.addEventListener('click', () => {
-            searchMenu(searchInput.value);
-        });
-
-        clearSearchBtn.addEventListener('click', () => {
-            searchInput.value = '';
-            renderMenu(menuItems);
-            clearSearchBtn.style.display = 'none';
-        });
-        
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterMenu(button.dataset.category);
-            });
-        });
+        searchInput.addEventListener('input', () => { const query = searchInput.value; searchMenu(query); clearSearchBtn.style.display = query ? 'flex' : 'none'; });
+        searchButton.addEventListener('click', () => { searchMenu(searchInput.value); });
+        clearSearchBtn.addEventListener('click', () => { searchInput.value = ''; renderMenu(menuItems); clearSearchBtn.style.display = 'none'; });
+        filterButtons.forEach(button => button.addEventListener('click', () => { filterMenu(button.dataset.category); }));
 
         renderMenu(menuItems);
         updateCartCount();
 
+        /*
+        ================================================================
+        == ฟังก์ชันสร้างใบเสร็จ (ส่วนที่ปรับปรุงใหม่) ==
+        ================================================================
+        */
         function generateReceipt() {
             let receiptItemsHtml = '';
             let totalPrice = 0;
@@ -599,49 +394,56 @@
                     if (noVegetables) optionsArray.push('ไม่ใส่ผัก');
                     if (extraEgg) optionsArray.push(`เพิ่ม${extraEgg}`);
                     if (optionsArray.length > 0) {
-                        optionsText = `<br><span style="font-size: 0.5rem; color: #555;">(${optionsArray.join(', ')})</span>`;
+                        optionsText = `<div class="item-options">${optionsArray.join(', ')}</div>`;
                     }
                 }
 
                 receiptItemsHtml += `
                     <tr>
-                        <td class="py-1 text-left">${menuItem.name}${optionsText}</td>
-                        <td class="py-1 text-center">${cartItem.quantity}</td>
-                        <td class="py-1 text-right">${itemPrice.toLocaleString()}</td>
-                        <td class="py-1 text-right">${itemTotalPrice.toLocaleString()}</td>
+                        <td class="col-item">${menuItem.name}${optionsText}</td>
+                        <td class="col-qty">${cartItem.quantity}</td>
+                        <td class="col-price">${itemPrice.toLocaleString()}</td>
+                        <td class="col-total">${itemTotalPrice.toLocaleString()}</td>
                     </tr>
                 `;
             });
 
+            // --- โค้ด HTML ของใบเสร็จที่ไม่มีเส้นประ ---
             const receiptHtml = `
-                <div id="receiptContent" class="receipt-container bg-white text-gray-900 w-[20rem] max-w-none mx-auto p-4">
-                    <div class="text-center space-y-2">
-                        <img src="https://i.postimg.cc/sgrzrM9t/S-2637831.jpg" alt="โลโก้ร้านกระแกร่ง" class="h-20 mx-auto object-contain mb-2">
-                        <h2 class="font-bold">ครัวกะแหร่ง</h2>
-                        <p>123 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110</p>
+                <div id="receiptContent" class="receipt-thermal bg-white text-gray-900">
+                    
+                    <div class="header-text" style="margin-bottom: 10px;">
+                        <img src="https://i.postimg.cc/sgrzrM9t/S-2637831.jpg" alt="โลโก้ร้าน" class="logo">
+                        <h2 style="font-weight: bold; font-size: 18px;">ครัวกะแหร่ง (ใบเสร็จอย่างย่อ)</h2>
+                        <p>123 ถนนสุขุมวิท แขวงคลองเตย</p>
+                        <p>เขตคลองเตย กรุงเทพมหานคร 10110</p>
                         <p>โทร: 081-234-5678</p>
-                        <div class="flex justify-between text-xs mt-2">
-                            <p>วันที่: ${formattedDate}</p>
-                            <p>เวลา: ${formattedTime}</p>
-                        </div>
                     </div>
-                    <table class="w-full text-xs mt-4">
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>วันที่: ${formattedDate}</span>
+                        <span>เวลา: ${formattedTime}</span>
+                    </div>
+
+                    <table class="item-table">
                         <thead>
                             <tr>
-                                <th class="py-1 font-semibold text-left">รายการ</th>
-                                <th class="py-1 font-semibold text-center">จำนวน</th>
-                                <th class="py-1 font-semibold text-right">ราคา/หน่วย</th>
-                                <th class="py-1 font-semibold text-right">รวม</th>
+                                <th class="col-item">รายการ</th>
+                                <th class="col-qty">จำนวน</th>
+                                <th class="col-price">ราคา</th>
+                                <th class="col-total">รวม</th>
                             </tr>
                         </thead>
                         <tbody>
                             ${receiptItemsHtml}
                         </tbody>
                     </table>
-                    <div class="text-right font-bold mt-4">
-                        <p class="total-price">ยอดรวมสุทธิ: ${totalPrice.toLocaleString()} บาท</p>
+
+                    <div style="text-align: right; font-weight: bold; font-size: 18px; margin-top: 10px;">
+                        ยอดรวมสุทธิ: ${totalPrice.toLocaleString()} บาท
                     </div>
-                    <div class="text-center text-xs mt-4 space-y-1">
+                    
+                    <div class="header-text" style="margin-top: 20px;">
                         <p>ขอบคุณที่ใช้บริการ</p>
                         <p>โอกาสหน้าเชิญใหม่นะครับ/คะ</p>
                     </div>
@@ -652,49 +454,25 @@
                 title: 'ใบเสร็จรับเงิน',
                 html: receiptHtml,
                 showConfirmButton: true,
-                confirmButtonText: 'ดาวน์โหลดรูปภาพ',
+                confirmButtonText: '<i class="fas fa-download"></i> ดาวน์โหลดรูปภาพ',
                 showCancelButton: true,
                 cancelButtonText: 'ปิด',
-                customClass: {
-                    popup: 'swal2-popup-custom',
-                    confirmButton: 'swal2-confirm-button-custom',
-                    cancelButton: 'swal2-cancel-button-custom',
-                    actions: 'swal2-actions'
-                },
-                width: '20rem',
+                customClass: { popup: 'swal2-popup-custom', confirmButton: 'swal2-confirm-button-custom', cancelButton: 'swal2-cancel-button-custom' },
+                width: 'auto',
                 buttonsStyling: false,
                 didOpen: () => {
                     document.querySelector('.swal2-confirm').onclick = () => {
                         const receiptContent = document.getElementById('receiptContent');
-                        if (!receiptContent) {
-                            console.error("Could not find the receipt content element.");
-                            Swal.close();
-                            return;
-                        }
-                        
                         html2canvas(receiptContent, {
-                            scale: 2,
-                            allowTaint: true,
+                            scale: 3,
                             useCORS: true
                         }).then(canvas => {
                             const link = document.createElement('a');
-                            link.download = `ใบเสร็จ_ครัวกะแกร่ง_${new Date().toLocaleDateString('th-TH')}.png`;
+                            link.download = `receipt_${Date.now()}.png`;
                             link.href = canvas.toDataURL('image/png');
-                            
-                            link.style.display = 'none';
-                            document.body.appendChild(link);
                             link.click();
-                            document.body.removeChild(link);
-                            
-                            Swal.close();
                         }).catch(error => {
-                            console.error("Error generating image:", error);
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'เกิดข้อผิดพลาด',
-                                text: 'ไม่สามารถสร้างไฟล์รูปภาพได้',
-                                confirmButtonText: 'ตกลง'
-                            });
+                            console.error("เกิดข้อผิดพลาดในการสร้างรูปภาพ:", error);
                         });
                     };
                 }
